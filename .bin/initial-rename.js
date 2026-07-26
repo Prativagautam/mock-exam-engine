@@ -23,13 +23,13 @@ const options = {
         /WpReactPluginBoilerplate/g,
     ],
     to: [
-        'your-renamed-plugin',/******************** replace with your plugin details */
-        'your_renamed_plugin',
-        'YOUR_RENAMED_PLUGIN',
-        'YOUR-RENAMED-PLUGIN',
-        'Your-Renamed-Plugin',
-        'Your_Renamed_Plugin',
-        'YourRenamedPlugin',
+    'mock-exam-engine',
+    'mock_exam_engine',
+    'MOCK_EXAM_ENGINE',
+    'MOCK-EXAM-ENGINE',
+    'Mock-Exam-Engine',
+    'Mock_Exam_Engine',
+    'MockExamEngine',
     ],
     verbose: true,
     dry: false,
@@ -45,7 +45,7 @@ async function renamePHPFiles() {
             const baseName = path.basename(file);
             const newBaseName = baseName.replace(
                 /wp-react-plugin-boilerplate/gi,
-                'your-renamed-plugin'/******************** replace with your plugin details */
+                'mock-exam-engine'/******************** replace with your plugin details */
             );
             const newFileName = path.join(dir, newBaseName);
 

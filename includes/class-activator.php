@@ -10,8 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @link       https://www.acmeit.org/
  * @since      1.0.0
  *
- * @package    Wp_React_Plugin_Boilerplate
- * @subpackage Wp_React_Plugin_Boilerplate/includes
+ * @package    Mock_Exam_Engine
+ * @subpackage Mock_Exam_Engine/includes
  */
 
 /**
@@ -20,11 +20,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  * This class defines all code necessary to run during the plugin's activation.
  *
  * @since      1.0.0
- * @package    Wp_React_Plugin_Boilerplate
- * @subpackage Wp_React_Plugin_Boilerplate/includes
+ * @package    Mock_Exam_Engine
+ * @subpackage Mock_Exam_Engine/includes
  * @author     codersantosh <codersantosh@gmail.com>
  */
-class Wp_React_Plugin_Boilerplate_Activator {
+class Mock_Exam_Engine_Activator {
 
 	/**
 	 * Short Description. (use period)

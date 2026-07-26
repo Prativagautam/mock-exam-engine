@@ -35,8 +35,8 @@ const MainContent = () => {
         <AtrcContent>
             <AtrcPanelRow>
                 <AtrcControlText
-                    label={__('Setting 1', 'wp-react-plugin-boilerplate')}
-                    placeholder={__('Enter Text', 'wp-react-plugin-boilerplate')}
+                    label={__('Setting 1', 'mock-exam-engine')}
+                    placeholder={__('Enter Text', 'mock-exam-engine')}
                     value={setting1}
                     onChange={newVal =>
                         dbUpdateSetting('setting1', newVal)
@@ -46,8 +46,8 @@ const MainContent = () => {
             </AtrcPanelRow>
             <AtrcPanelRow>
                 <AtrcControlText
-                    label={__('Setting 2', 'wp-react-plugin-boilerplate')}
-                    placeholder={__('Enter Another Text', 'wp-react-plugin-boilerplate')}
+                    label={__('Setting 2', 'mock-exam-engine')}
+                    placeholder={__('Enter Another Text', 'mock-exam-engine')}
                     value={setting2}
                     onChange={newVal =>
                         dbUpdateSetting('setting2', newVal)
@@ -84,7 +84,7 @@ const Documentation = () => {
                         className={classNames(AtrcPrefix('m-0'))}
                         title={__(
                             'FAQ Query 1?',
-                            'wp-react-plugin-boilerplate'
+                            'mock-exam-engine'
                         )}
                         initialOpen={true}>
                         <AtrcText
@@ -92,19 +92,19 @@ const Documentation = () => {
                             className={classNames(AtrcPrefix('m-0'), 'at-m')}>
                             {__(
                                 'FAQ Answer 1',
-                                'wp-react-plugin-boilerplate'
+                                'mock-exam-engine'
                             )}
                         </AtrcText>
                     </AtrcPanelBody>
                     <AtrcPanelBody
-                        title={__('FAQ Query 2?', 'wp-react-plugin-boilerplate')}
+                        title={__('FAQ Query 2?', 'mock-exam-engine')}
                         initialOpen={false}>
                         <AtrcText
                             tag='p'
                             className={classNames(AtrcPrefix('m-0'), 'at-m')}>
                             {__(
                                 'FAQ Answer 2',
-                                'wp-react-plugin-boilerplate'
+                                'mock-exam-engine'
                             )}
                         </AtrcText>
                     </AtrcPanelBody>
@@ -130,7 +130,7 @@ const Settings = () => {
                 className: classNames(AtrcPrefix('bg-white'), 'at-bg-cl'),
             }}
             renderHeader={
-                <AtrcTitleTemplate1 title={__('Settings', 'wp-react-plugin-boilerplate')} />
+                <AtrcTitleTemplate1 title={__('Settings', 'mock-exam-engine')} />
             }
             renderContent={
                 <AtrcWireFrameContentSidebar

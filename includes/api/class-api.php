@@ -10,8 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @link       https://www.acmeit.org/
  * @since      1.0.0
  *
- * @package    Wp_React_Plugin_Boilerplate
- * @subpackage Wp_React_Plugin_Boilerplate/includes/api
+ * @package    Mock_Exam_Engine
+ * @subpackage Mock_Exam_Engine/includes/api
  */
 
 /**
@@ -19,31 +19,31 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Define namespace, vresion and other common properties and methods.
  *
- * @package    Wp_React_Plugin_Boilerplate
- * @subpackage Wp_React_Plugin_Boilerplate/includes/api
+ * @package    Mock_Exam_Engine
+ * @subpackage Mock_Exam_Engine/includes/api
  * @author     codersantosh <codersantosh@gmail.com>
  */
-if ( ! class_exists( 'Wp_React_Plugin_Boilerplate_Api' ) ) {
+if ( ! class_exists( 'Mock_Exam_Engine_Api' ) ) {
 
 	/**
-	 * Wp_React_Plugin_Boilerplate_Api
+	 * Mock_Exam_Engine_Api
 	 *
-	 * @package Wp_React_Plugin_Boilerplate
+	 * @package Mock_Exam_Engine
 	 * @since 1.0.1
 	 */
-	class Wp_React_Plugin_Boilerplate_Api extends WP_REST_Controller {
+	class Mock_Exam_Engine_Api extends WP_REST_Controller {
 
 		/**
 		 * Rest route namespace.
 		 *
-		 * @var Wp_React_Plugin_Boilerplate_Api
+		 * @var Mock_Exam_Engine_Api
 		 */
-		public $namespace = 'wp-react-plugin-boilerplate/';
+		public $namespace = 'mock-exam-engine/';
 
 		/**
 		 * Rest route version.
 		 *
-		 * @var Wp_React_Plugin_Boilerplate_Api
+		 * @var Mock_Exam_Engine_Api
 		 */
 		public $version = 'v1';
 
@@ -112,7 +112,7 @@ if ( ! class_exists( 'Wp_React_Plugin_Boilerplate_Api' ) ) {
 		 */
 		public function __clone() {
 			// Cloning instances of the class is forbidden.
-			_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; huh?', 'wp-react-plugin-boilerplate' ), '1.0.0' );
+			_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; huh?', 'mock-exam-engine' ), '1.0.0' );
 		}
 
 		/**
@@ -124,7 +124,7 @@ if ( ! class_exists( 'Wp_React_Plugin_Boilerplate_Api' ) ) {
 		 */
 		public function __wakeup() {
 			// Unserializing instances of the class is forbidden.
-			_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; huh?', 'wp-react-plugin-boilerplate' ), '1.0.0' );
+			_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; huh?', 'mock-exam-engine' ), '1.0.0' );
 		}
 	}
 }

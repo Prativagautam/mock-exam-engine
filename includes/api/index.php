@@ -2,7 +2,7 @@
 /**
  * Includes necessary files
  *
- * @package Wp_React_Plugin_Boilerplate
+ * @package Mock_Exam_Engine
  * @since 1.0.0
  */
 

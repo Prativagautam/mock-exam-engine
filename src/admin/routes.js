@@ -117,7 +117,7 @@ const InitLocalStorageSettings = (props) => {
     };
     return (
         <InitDataBaseSettingsWithHoc
-            atrcStore={WpReactPluginBoilerplateLocalize.store}//store from AtrcRegisterStore
+            atrcStore={MockExamEngineLocalize.store}//store from AtrcRegisterStore
             atrcStoreKey='settings'//key from admin.js
             lsSettings={settings || defaultSettings}
             lsUpdateSetting={updateSetting}
@@ -131,14 +131,14 @@ const InitLocalStorageSettingsWithHoc = AtrcApplyWithSettings(
 
 document.addEventListener('DOMContentLoaded', () => {
     // Check if the root element exists in the DOM
-    const rootElement = document.getElementById(WpReactPluginBoilerplateLocalize.root_id);
+    const rootElement = document.getElementById(MockExamEngineLocalize.root_id);
 
     if (rootElement) {
         // Render the component into the root element
         render(
             <InitLocalStorageSettingsWithHoc
-                atrcStore={WpReactPluginBoilerplateLocalize.store} //store from AtrcRegisterStore
-                atrcStoreKey='WpReactPluginBoilerplateLocal'//key from admin.js
+                atrcStore={MockExamEngineLocalize.store} //store from AtrcRegisterStore
+                atrcStoreKey='MockExamEngineLocal'//key from admin.js
             />,
             rootElement
         );

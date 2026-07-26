@@ -12,8 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @link       https://www.acmeit.org/
  * @since      1.0.0
  *
- * @package    Wp_React_Plugin_Boilerplate
- * @subpackage Wp_React_Plugin_Boilerplate/includes
+ * @package    Mock_Exam_Engine
+ * @subpackage Mock_Exam_Engine/includes
  */
 
 /**
@@ -23,11 +23,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  * so that it is ready for translation.
  *
  * @since      1.0.0
- * @package    Wp_React_Plugin_Boilerplate
- * @subpackage Wp_React_Plugin_Boilerplate/includes
+ * @package    Mock_Exam_Engine
+ * @subpackage Mock_Exam_Engine/includes
  * @author     codersantosh <codersantosh@gmail.com>
  */
-class Wp_React_Plugin_Boilerplate_I18n {
+class Mock_Exam_Engine_I18n {
 
 	/**
 	 * Load the plugin text domain for translation.
@@ -37,7 +37,7 @@ class Wp_React_Plugin_Boilerplate_I18n {
 	public function load_plugin_textdomain() {
 
 		load_plugin_textdomain(
-			'wp-react-plugin-boilerplate',
+			'mock-exam-engine',
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
 		);

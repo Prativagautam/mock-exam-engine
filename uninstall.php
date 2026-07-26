@@ -22,7 +22,7 @@
  * @link       https://www.acmeit.org/
  * @since      1.0.0
  *
- * @package    Wp_React_Plugin_Boilerplate
+ * @package    Mock_Exam_Engine
  */
 
 // If uninstall not called from WordPress, then exit.
