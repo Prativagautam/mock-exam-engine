@@ -156,6 +156,7 @@ private function define_include_hooks() {
     /* Register custom post types and taxonomies */
     $this->loader->add_action( 'init', $plugin_post_types, 'register_post_types' );
     $this->loader->add_action( 'init', $plugin_post_types, 'register_taxonomies' );
+	$this->loader->add_action( 'init', $plugin_post_types, 'register_meta_fields' );
 }
 
 	/**

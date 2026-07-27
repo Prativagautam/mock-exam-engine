@@ -184,7 +184,159 @@ class Mock_Exam_Engine_Post_Types {
 			)
 		);
 	}
+
+
+	public function register_meta_fields() {
+		$this->register_question_meta_fields();
+		$this->register_mock_test_meta_fields();
+		$this->register_attempt_meta_fields();
+	}
+
+	public function register_question_meta_fields() {
+		$string_fields = array( 'question_text', 'option_a', 'option_b', 'option_c', 'option_d', 'correct_option', 'difficulty' );
+		foreach ( $string_fields as $field ) {
+			register_post_meta(
+				'question',
+				$field,
+				array(
+					'type'         => 'string',
+					'single'       => true,
+					'show_in_rest' => true,
+				)
+			);
+		}
+
+		$number_fields = array( 'marks', 'negative_marks' );
+		foreach ( $number_fields as $field ) {
+			register_post_meta(
+				'question',
+				$field,
+				array(
+					'type'         => 'number',
+					'single'       => true,
+					'show_in_rest' => true,
+				)
+			);
+		}
+	}
+
+	public function register_mock_test_meta_fields() {
+		register_post_meta(
+			'mock_test',
+			'duration_minutes',
+			array(
+				'type'         => 'number',
+				'single'       => true,
+				'show_in_rest' => true,
+			)
+		);
+
+		register_post_meta(
+			'mock_test',
+			'question_ids',
+			array(
+				'type'         => 'array',
+				'single'       => true,
+				'show_in_rest' => array(
+					'schema' => array(
+						'type'  => 'array',
+						'items' => array( 'type' => 'integer' ),
+					),
+				),
+			)
+		);
+
+		register_post_meta(
+			'mock_test',
+			'subject_weightage',
+			array(
+				'type'         => 'object',
+				'single'       => true,
+				'show_in_rest' => array(
+					'schema' => array(
+						'type'                 => 'object',
+						'additionalProperties' => array( 'type' => 'number' ),
+					),
+				),
+			)
+		);
+	}
+
+	public function register_attempt_meta_fields() {
+		register_post_meta(
+			'attempt',
+			'mock_test_id',
+			array(
+				'type'         => 'integer',
+				'single'       => true,
+				'show_in_rest' => true,
+			)
+		);
+
+		register_post_meta(
+			'attempt',
+			'status',
+			array(
+				'type'         => 'string',
+				'single'       => true,
+				'show_in_rest' => true,
+			)
+		);
+
+		foreach ( array( 'started_at', 'submitted_at' ) as $field ) {
+			register_post_meta(
+				'attempt',
+				$field,
+				array(
+					'type'         => 'string',
+					'single'       => true,
+					'show_in_rest' => true,
+				)
+			);
+		}
+
+		register_post_meta(
+			'attempt',
+			'answers',
+			array(
+				'type'         => 'object',
+				'single'       => true,
+				'show_in_rest' => array(
+					'schema' => array(
+						'type'                 => 'object',
+						'additionalProperties' => array( 'type' => 'string' ),
+					),
+				),
+			)
+		);
+
+		register_post_meta(
+			'attempt',
+			'score',
+			array(
+				'type'         => 'number',
+				'single'       => true,
+				'show_in_rest' => true,
+			)
+		);
+
+		register_post_meta(
+			'attempt',
+			'subject_breakdown',
+			array(
+				'type'         => 'object',
+				'single'       => true,
+				'show_in_rest' => array(
+					'schema' => array(
+						'type'                 => 'object',
+						'additionalProperties' => array( 'type' => 'object' ),
+					),
+				),
+			)
+		);
+	}
 }
+
 
 if ( ! function_exists( 'mock_exam_engine_post_types' ) ) {
 	/**
