@@ -103,6 +103,11 @@ class Mock_Exam_Engine {
 		require_once MOCK_EXAM_ENGINE_PATH . 'includes/class-include.php';
 
 		/**
+ * The class responsible for registering custom post types and taxonomies.
+ */
+require_once MOCK_EXAM_ENGINE_PATH . 'includes/class-post-types.php';
+
+		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once MOCK_EXAM_ENGINE_PATH . 'admin/class-admin.php';
@@ -139,13 +144,19 @@ class Mock_Exam_Engine {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function define_include_hooks() {
+private function define_include_hooks() {
 
-		$plugin_include = mock_exam_engine_include();
+    $plugin_include = mock_exam_engine_include();
 
-		/* Register scripts and styles */
-		$this->loader->add_action( 'init', $plugin_include, 'register_scripts_and_styles' );
-	}
+    /* Register scripts and styles */
+    $this->loader->add_action( 'init', $plugin_include, 'register_scripts_and_styles' );
+
+    $plugin_post_types = mock_exam_engine_post_types();
+
+    /* Register custom post types and taxonomies */
+    $this->loader->add_action( 'init', $plugin_post_types, 'register_post_types' );
+    $this->loader->add_action( 'init', $plugin_post_types, 'register_taxonomies' );
+}
 
 	/**
 	 * Register all of the hooks related to the admin area functionality
