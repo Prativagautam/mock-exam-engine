@@ -13,3 +13,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 require_once trailingslashit( __DIR__ ) . 'class-api.php';
 require_once trailingslashit( __DIR__ ) . 'class-api-settings.php';
+require_once trailingslashit( __DIR__ ) . 'class-api-attempts.php';
