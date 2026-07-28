@@ -65,6 +65,44 @@ if ( ! class_exists( 'Mock_Exam_Engine_Api_Auth' ) ) {
 					),
 				)
 			);
+            register_rest_route(
+				$namespace,
+				'/' . $this->rest_base . '/forgot-password',
+				array(
+					'methods'             => WP_REST_Server::CREATABLE,
+					'callback'            => array( $this, 'forgot_password' ),
+					'permission_callback' => '__return_true',
+					'args'                => array(
+						'email' => array(
+							'required' => true,
+							'type'     => 'string',
+						),
+					),
+				)
+			);
+            register_rest_route(
+				$namespace,
+				'/' . $this->rest_base . '/reset-password',
+				array(
+					'methods'             => WP_REST_Server::CREATABLE,
+					'callback'            => array( $this, 'reset_password' ),
+					'permission_callback' => '__return_true',
+					'args'                => array(
+						'login'        => array(
+							'required' => true,
+							'type'     => 'string',
+						),
+						'key'          => array(
+							'required' => true,
+							'type'     => 'string',
+						),
+						'new_password' => array(
+							'required' => true,
+							'type'     => 'string',
+						),
+					),
+				)
+			);
 
 		}
 
@@ -156,6 +194,54 @@ if ( ! class_exists( 'Mock_Exam_Engine_Api_Auth' ) ) {
 					'username' => $user->user_login,
 					'roles'    => $user->roles,
 					'nonce'    => wp_create_nonce( 'wp_rest' ),
+				)
+			);
+		}
+        /**
+		 * POST /auth/forgot-password
+		 * Triggers WordPress's built-in password reset email flow.
+		 *
+		 * We deliberately return the SAME success message whether or not
+		 * the email actually matches an account — this stops an attacker
+		 * from using this endpoint to test which emails are registered.
+		 */
+		public function forgot_password( $request ) {
+			$email = sanitize_email( $request['email'] );
+
+			$user = get_user_by( 'email', $email );
+
+			if ( $user ) {
+				retrieve_password( $user->user_login );
+			}
+
+			return rest_ensure_response(
+				array(
+					'message' => __( 'If that email is registered, a password reset link has been sent.', 'mock-exam-engine' ),
+				)
+			);
+		}
+        /**
+		 * POST /auth/reset-password
+		 * Validates the reset key emailed to the user, then sets the new password.
+		 */
+		public function reset_password( $request ) {
+			$login = sanitize_user( $request['login'] );
+			$key   = sanitize_text_field( $request['key'] );
+
+			$user = check_password_reset_key( $key, $login );
+
+			if ( is_wp_error( $user ) ) {
+				// Same "don't leak specifics" principle as Login — whether the
+				// key was wrong, expired, or the login didn't match, the caller
+				// gets one generic message either way.
+				return new WP_Error( 'rest_invalid_reset_key', __( 'This password reset link is invalid or has expired.', 'mock-exam-engine' ), array( 'status' => 400 ) );
+			}
+
+			reset_password( $user, $request['new_password'] );
+
+			return rest_ensure_response(
+				array(
+					'message' => __( 'Your password has been reset. You can now log in.', 'mock-exam-engine' ),
 				)
 			);
 		}
