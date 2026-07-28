@@ -46,6 +46,26 @@ if ( ! class_exists( 'Mock_Exam_Engine_Api_Auth' ) ) {
 					),
 				)
 			);
+            register_rest_route(
+				$namespace,
+				'/' . $this->rest_base . '/login',
+				array(
+					'methods'             => WP_REST_Server::CREATABLE,
+					'callback'            => array( $this, 'login_user' ),
+					'permission_callback' => '__return_true',
+					'args'                => array(
+						'username' => array(
+							'required' => true,
+							'type'     => 'string',
+						),
+						'password' => array(
+							'required' => true,
+							'type'     => 'string',
+						),
+					),
+				)
+			);
+
 		}
 
 		/**
@@ -93,6 +113,53 @@ if ( ! class_exists( 'Mock_Exam_Engine_Api_Auth' ) ) {
 				)
 			);
 		}
+        /**
+		 * POST /auth/login
+		 * Verifies credentials and starts a real logged-in browser session.
+		 *
+		 * Uses wp_signon() to check the password, then wp_set_auth_cookie()
+		 * to actually log the browser in — this is what a nonce-based
+		 * request could never do, since a nonce requires already being
+		 * logged in.
+		 */
+        public function login_user( $request ) {
+			$creds = array(
+				'user_login'    => sanitize_user( $request['username'] ),
+				'user_password' => $request['password'],
+				'remember'      => true,
+			);
+
+			$user = wp_signon( $creds, is_ssl() );
+
+			if ( is_wp_error( $user ) ) {
+				return new WP_Error( 'rest_login_failed', __( 'Invalid username or password.', 'mock-exam-engine' ), array( 'status' => 403 ) );
+			}
+
+			wp_set_current_user( $user->ID );
+
+			$expiration = time() + apply_filters( 'auth_cookie_expiration', 14 * DAY_IN_SECONDS, $user->ID, true );
+			$manager    = WP_Session_Tokens::get_instance( $user->ID );
+			$token      = $manager->create( $expiration );
+
+			wp_set_auth_cookie( $user->ID, true, is_ssl(), $token );
+
+			// wp_set_auth_cookie() only updates the cookie the BROWSER will send on its
+			// NEXT request — it doesn't update PHP's own $_COOKIE for THIS request. Since
+			// we want to generate a working nonce right now, in this same request, we
+			// manually sync $_COOKIE so wp_create_nonce() computes against the same
+			// session token we just wrote into the real cookie.
+			$_COOKIE[ LOGGED_IN_COOKIE ] = wp_generate_auth_cookie( $user->ID, $expiration, 'logged_in', $token );
+
+			return rest_ensure_response(
+				array(
+					'user_id'  => $user->ID,
+					'username' => $user->user_login,
+					'roles'    => $user->roles,
+					'nonce'    => wp_create_nonce( 'wp_rest' ),
+				)
+			);
+		}
+
 
 		public static function get_instance() {
 			static $instance = null;
@@ -101,6 +168,8 @@ if ( ! class_exists( 'Mock_Exam_Engine_Api_Auth' ) ) {
 			}
 			return $instance;
 		}
+
+
 	}
 }
 
